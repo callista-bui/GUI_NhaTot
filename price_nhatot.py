@@ -83,6 +83,7 @@ st.markdown(
     [data-testid="stSidebar"] [data-testid="stCaptionContainer"] * {
         color: #000000 !important;
     }
+    
     </style>
 """,
     unsafe_allow_html=True,
@@ -133,8 +134,8 @@ st.set_page_config(
 
 
 
-
-house_options = ["Trang chủ","Dự đoán giá nhà", "Phát hiện giá bất thường","Sử dụng các điều khiển"]
+house_options = ["Trang chủ","Dự đoán giá nhà", "Phát hiện giá bất thường"]
+# house_options = ["Trang chủ","Dự đoán giá nhà", "Phát hiện giá bất thường","Sử dụng các điều khiển"]
 house = st.sidebar.selectbox( "📋 Menu", house_options, key="main_menu")
 st.markdown("""
     <style>
@@ -148,8 +149,7 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
-st.sidebar.markdown("---")
-st.sidebar.caption("💡 *Đồ án Data Science & Machine Learning*")
+
 # Tiêu đề chính của ứng dụng
 st.markdown("<h2 class='main-title'>🏠 Nhà Tốt - Phân tích và Dự đoán giá nhà</h2>", unsafe_allow_html=True,)
 st.markdown(
@@ -173,7 +173,26 @@ import streamlit as st
 
 # Giả sử bạn tạo menu bên thanh sidebar như sau:
 # choice = st.sidebar.selectbox("Chọn trang", ["Trang chủ", "Dự đoán giá", "Phát hiện bất thường"])
+st.sidebar.markdown("---")
 
+# Tạo khoảng trống trước phần thông tin
+st.sidebar.markdown(
+    """
+    <div style="height: 35vh;"></div>
+    """,
+    unsafe_allow_html=True
+)
+
+st.sidebar.markdown("**Thông tin thành viên**")
+
+st.sidebar.caption(
+    "Lê Thị Hà My\n\n"
+    "📧 lehamy.yds@gmail.com\n\n"
+    "Bùi Thị Thư\n\n"
+    "📧 buithithu.ntt@gmail.com"
+)
+
+st.sidebar.caption("💡 *Đồ án Data Science & Machine Learning*")
 if house == "Trang chủ":
     # --- HEADER BANNER TRANG CHỦ ---
     # st.title("🚀 Đồ án Data Science")
