@@ -12,9 +12,6 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# if "saved_houses" not in st.session_state:
-#   st.session_state["saved_houses"] = []
-
 # Thư mục chứa file price_nhatot.py
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -89,22 +86,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# st.markdown(
-#     """
-#     <style>
-#     /* Định dạng màu nền xanh nhạt, viền xanh lá/xanh biển dịu cho st.info */
-#     div.stAlert > div[role="alert"] {
-#         background-color: #E8F4F8 !important; /* Màu xanh nhạt (Soft Light Blue) */
-#         color: #1A365D !important;            /* Màu chữ xanh đen đậm dễ đọc */
-#         border: 1px solid #BEE3F8 !important; /* Viền xanh nhạt pastel */
-#         border-left: 5px solid #3182CE !important; /* Đường nhấn xanh lơ bên trái */
-#         border-radius: 8px !important;
-#     }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
-
 # 1. Cấu hình trang
 st.set_page_config(
     page_title="Nhà Tốt - AI Real Estate App",
@@ -112,30 +93,8 @@ st.set_page_config(
     layout="wide"
 )
 
-# 2. Cấu hình Sidebar Navigation
-# with st.sidebar:
-#     st.image("ngoinha01.jpg", width=100)
-#     st.title("📌 Menu Điều Hướng")
-    
-#     house = st.radio(
-#         "Chọn chức năng:",
-#         options=[
-#             "🏠 Trang chủ",
-#             "📈 Dự đoán giá nhà",
-#             "🛡️ Phát hiện bất thường",
-#             "📊 Dashboard EDA"
-#         ],
-#         index=0
-#     )
- 
-#     st.markdown("---")
-#     st.info("💡 **Mẹo:** Chọn các trang trên để trải nghiệm các mô hình AI định giá BĐS.")
-
-
-
-
 house_options = ["Trang chủ","Dự đoán giá nhà", "Phát hiện giá bất thường"]
-# house_options = ["Trang chủ","Dự đoán giá nhà", "Phát hiện giá bất thường","Sử dụng các điều khiển"]
+
 house = st.sidebar.selectbox( "📋 Menu", house_options, key="main_menu")
 st.markdown("""
     <style>
@@ -152,27 +111,23 @@ st.markdown("""
 
 # Tiêu đề chính của ứng dụng
 st.markdown("<h2 class='main-title'>🏠 Nhà Tốt - Phân tích và Dự đoán giá nhà</h2>", unsafe_allow_html=True,)
-st.markdown(
-    "<div class='sub-title'>"
-    "Ứng dụng phân tích dữ liệu, dự đoán giá và phát hiện giá bất thường "
-    "bất động sản."
-    "</div>",
-    unsafe_allow_html=True,
-)
+# st.markdown(
+#     "<div class='sub-title'>"
+#     "Ứng dụng phân tích dữ liệu, dự đoán giá và phát hiện giá bất thường "
+#     "bất động sản."
+#     "</div>",
+#     unsafe_allow_html=True,
+# )
 
 # Hình ảnh ở đầu trang
 image_path = BASE_DIR / "nhatot.jpg"
 
-if image_path.exists():st.image(image_path, use_container_width=True)
+if image_path.exists():st.image(image_path, use_container_width=150)
 else:
     st.warning("⚠️ Không tìm thấy hình ảnh nhatot.jpg")
 
-# Xử lý các trang theo lựa chọn của Menu
-# chọn trang chủ nhớ sửa lại
 import streamlit as st
 
-# Giả sử bạn tạo menu bên thanh sidebar như sau:
-# choice = st.sidebar.selectbox("Chọn trang", ["Trang chủ", "Dự đoán giá", "Phát hiện bất thường"])
 st.sidebar.markdown("---")
 
 # Tạo khoảng trống trước phần thông tin
@@ -200,27 +155,6 @@ if house == "Trang chủ":
     
     st.info("Chào mừng bạn đến với ứng dụng tích hợp các mô hình Machine Learning thực tế!")
     
-    # --- TÓM TẮT 2 CHỦ ĐỀ CHÍNH ---
-    # col1, col2 = st.columns(2)
-    # with col1:
-    #     st.write("### 🏠 Topic 1")
-    #     st.write("**Dự đoán giá nhà**")
-    #     st.caption("Sử dụng các mô hình Regression để định giá bất động sản.")
-        
-    # with col2:
-    #     st.write("### 🏢 Topic 2")
-    #     st.write("**Phát hiện giá nhà bất thường**")
-    #     st.caption("Sử dụng dữ liệu Nhà Tốt để tìm kiếm các mức giá Outlier/Bất thường.")
-
-    # st.markdown("---")
-
-    # =========================================================
-    # BỔ SUNG CHI TIẾT DỰ ÁN (BUSINESS UNDERSTANDING & METRICS)
-    # =========================================================
-# =========================================================
-# HAI CHỨC NĂNG CHÍNH
-# =========================================================
-
     st.markdown(
         """
         <h4 style="margin-bottom: 4px;">🎯 Hai chức năng chính</h4>
@@ -234,8 +168,6 @@ if house == "Trang chủ":
     )
 
     col1, col2 = st.columns(2, gap="medium")
-
-
     # =========================================================
     # CHỨC NĂNG 1
     # =========================================================
@@ -320,206 +252,8 @@ if house == "Trang chủ":
                 f"<div style='font-size: 24px; margin: 0;'>{icon}</div>",
                 unsafe_allow_html=True
             )
-            st.caption(title)
-    # st.header("1. Thấu hiểu Kinh doanh")
-
-    # col_bg, col_problem = st.columns([1, 1], gap="large")
-
-    # with col_bg:
-    #     st.subheader("📌 Bối cảnh")
-    #     st.write(
-    #         "Nền tảng thương mại điện tử bất động sản **Nhà Tốt** tiếp nhận hàng nghìn "
-    #         "tin đăng rao bán nhà mỗi ngày. Tuy nhiên, việc định giá hiện nay chủ yếu "
-    #         "mang tính cảm tính từ người bán, dẫn đến nhiều bất cập trong thanh khoản "
-    #         "và trải nghiệm người dùng."
-    #     )
-
-    # with col_problem:
-    #     st.subheader("⚠️ Vấn đề tồn đọng")
-    #     st.error("**Tin đăng giá quá cao ('ngáo giá'):** Bài đăng tồn đọng lâu ngày, giảm thanh khoản của sàn và giảm trải nghiệm người mua thực sự.")
-    #     st.warning("**Tin đăng giá quá rẻ bất thường:** Dấu hiệu tin mồi/câu view, lừa đảo cọc hoặc pháp lý nặng (quy hoạch/tranh chấp), gây tổn hại uy tín nghiêm trọng.")
-
-    # st.subheader("🎯 Mục tiêu Dự án")
-    # m1, m2 = st.columns(2)
-    # with m1:
-    #     st.info(
-    #         "**1. Gợi ý giá bán hợp lý:** "
-    #         "Xây dựng hệ thống học máy tự động dự đoán & gợi ý mức giá bán tối ưu "
-    #         "dựa trên vị trí, diện tích và các đặc tính vật lý của căn nhà."
-    #     )
-    # with m2:
-    #     st.info(
-    #         "**2. Phát hiện bất thường (Anomaly Detection):** "
-    #         "Xây dựng bộ quy tắc & hàm tính điểm bất thường ($0 - 100$) để tự động "
-    #         "gắn cờ cảnh báo cho đội ngũ kiểm duyệt tin đăng."
-    #     )
-
-    # st.markdown("---")
-
-    # st.header("2. Phân loại Bài toán Học máy")
-
-    # col_task1, col_task2 = st.columns(2, gap="medium")
-
-    # with col_task1:
-    #     st.markdown("### 📈 Bài toán 1: Dự đoán Giá bán")
-    #     st.markdown("- **Loại bài toán:** Regression (Hồi quy)")
-    #     st.markdown("- **Biến mục tiêu:** `gia_ban` (Đơn vị: Tỷ VNĐ)")
-    #     st.markdown(
-    #         "- **Mô tả:** Mô hình hóa mối quan hệ phi tuyến giữa tập đặc trưng đa chiều "
-    #         "(diện tích, số phòng, tọa độ, pháp lý...) và giá trị thực tế của bất động sản."
-    #     )
-
-    # with col_task2:
-    #     st.markdown("### 🛡️ Bài toán 2: Phát hiện Bất thường")
-    #     st.markdown("- **Loại bài toán:** Anomaly Detection / Rule-based System")
-    #     st.markdown("- **Đầu ra:** Điểm bất thường `Anomaly Score` từ $0 - 100$")
-    #     st.markdown(
-    #         "- **Mô tả:** Kết hợp độ lệch chuẩn đơn giá, khoảng tin cậy P5-P95 và "
-    #         "các quy luật logic nghiệp vụ để trích xuất danh sách Top-k% nhà quá rẻ hoặc quá đắt."
-    #     )
-
-    # st.markdown("---")
-
-    # st.header("3. Chỉ số Đánh giá Mô hình")
-
-    # m_col1, m_col2, m_col3 = st.columns(3)
-
-    # with m_col1:
-    #     st.metric(label="MAE", value="Mean Absolute Error", delta="Đơn vị: Tỷ VNĐ", delta_color="normal")
-    #     st.write("Đo lường sai số tuyệt đối trung bình. Trực quan và dễ hiểu đối với đội ngũ vận hành kinh doanh.")
-
-    # with m_col2:
-    #     st.metric(label="RMSE", value="Root Mean Squared Error", delta="Phạt lỗi lớn", delta_color="inverse")
-    #     st.write("Căn bậc hai của sai số bình phương trung bình. Trọng số phạt nặng hơn đối với các lệch giá lớn.")
-
-    # with m_col3:
-    #     st.metric(label="R² Score", value="Hệ số xác định", delta="Càng gần 1.0 càng tốt")
-    #     st.write("Đo lường tỷ lệ phương sai của giá nhà được giải thích bởi mô hình so với biến động thực tế.")
-# if choice == "Trang chủ":
-#     st.title("🚀 Đồ án Data Science")
-#     st.markdown("Đơn vị đào tạo: [Trung tâm Tin học - ĐH KHTN](https://csc.edu.vn)")
-    
-#     st.info("Chào mừng bạn đến với ứng dụng tích hợp các mô hình Machine Learning thực tế!")
-    
-#     col1, col2 = st.columns(2)
-#     with col1:
-#         st.write("### 🏠 Topic 1")
-#         st.write("**Dự đoán giá nhà**")
-#         st.caption("Sử dụng các mô hình Regression để định giá bất động sản.")
-        
-#     with col2:
-#         st.write("### 🏢 Topic 2")
-#         st.write("**Phát hiện giá nhà bất thường**")
-#         st.caption("Sử dụng dữ liệu Nhà Tốt để tìm kiếm các mức giá Outlier/Bất thường.")
-
-# elif choice == "Giới thiệu đồ án":
-#     st.subheader(
-#         "[Đồ án TN Data Science](https://csc.edu.vn/data-science-machine-learning/Do-An-Tot-Nghiep-Data-Science---Machine-Learning_229)"
-#     )
-#     st.write("""
-#     ### Có 2 vấn đề chính:
-#     - **Topic 1:** Dự đoán giá nhà 
-#     - **Topic 2:** Phát hiện giá nhà bất thường (Dữ liệu Nhà Tốt)
-#     """)
-
-#     # Hiển thị các hình ảnh liên quan đến đồ án
-#     col_img1, col_img2 = st.columns(2)
-
-#     with col_img1:
-#         img_nhatot = BASE_DIR / "nhatot.jpg"
-#         if img_nhatot.exists():
-#             st.image(str(img_nhatot), width=350, caption="Nhà Tốt.vn")
-#         else:
-#             st.image(
-#                 "https://static.chotot.com/storage/default/nhatot_logo.png",
-#                 width=300,
-#                 caption="Nhà Tốt.vn",
-#             )
-
-#     with col_img2:
-#         img_rec = BASE_DIR / "recommend.png"
-#         if img_rec.exists():
-#             st.image(str(img_rec), width=350, caption="Recommend Or Not")
-#         else:
-#             st.info("📌 *(Hình ảnh `recommend.png`)*")
+            st.caption(title) 
             
-elif house == "Sử dụng các điều khiển":
-    # Sử dụng các điều khiển nhập
-    # 1. Text
-    st.subheader("1. Text")
-    name = st.text_input("Enter your name")
-    st.write("Your name is", name)
-
-    # 2. Slider
-    st.subheader("2. Slider")
-    age = st.slider("How old are you?", 1, 100, 20)
-    st.write("I'm", age, "years old.")
-
-    # 3. Checkbox
-    st.subheader("3. Checkbox")
-    if st.checkbox("I agree"):
-        st.write("Great!")
-
-    # 4. Radio
-    st.subheader("4. Radio")
-    status = st.radio("What is your status?", ("Active", "Inactive"))
-    st.write("You are", status)
-
-    # 5. Selectbox
-    st.subheader("5. Selectbox")
-    occupation = st.selectbox(
-        "What is your occupation?", ["Student", "Teacher", "Others"]
-    )
-    st.write("You are a", occupation)
-
-    # 6. Multiselect
-    st.subheader("6. Multiselect")
-    location = st.multiselect(
-        "Where do you live?", ("Hanoi", "HCM", "Danang", "Hue")
-    )
-    st.write("You live in", location)
-
-    # 7. File Uploader
-    st.subheader("7. File Uploader")
-    file = st.file_uploader("Upload your file", type=["csv", "txt"])
-    if file is not None:
-        st.write(file)
-
-    # 9. Date Input
-    st.subheader("9. Date Input")
-    date = st.date_input("Pick a date")
-    st.write("You picked", date)
-
-    # 10. Time Input
-    st.subheader("10. Time Input")
-    time = st.time_input("Pick a time")
-    st.write("You picked", time)
-
-    # 11. Display JSON
-    st.subheader("11. Display JSON")
-    json_val = st.text_input("Enter JSON", '{"name": "Alice", "age": 25}')
-    st.write("You entered", json_val)
-
-    # 12. Display Raw Code
-    st.subheader("12. Display Raw Code")
-    code_val = st.text_area("Enter code", "print('Hello, world!')")
-    st.write("You entered", code_val)
-
-    # Sử dụng điều khiển submit
-    st.subheader("Submit")
-    submitted = st.button("Submit")
-    if submitted:
-        st.write("You submitted the form.")
-        # In các thông tin phía trên khi người dùng nhấn nút Submit
-        st.write("Your name is", name)
-        st.write("I'm", age, "years old.")
-        st.write("You are", status)
-        st.write("You are a", occupation)
-        st.write("You live in", location)
-        st.write("You picked", date)
-        st.write("You picked", time)
-        st.write("You entered", json_val)
-        st.write("You entered", code_val)  
 elif house == "Dự đoán giá nhà":
     st.write(
         "##### Dự đoán giá nhà"
@@ -848,191 +582,9 @@ elif house == "Dự đoán giá nhà":
                     st.error(f"Không thể đọc file CSV: {e}") 
                     
 elif house == "Phát hiện giá bất thường":
-
-    # st.write("##### 🚨 Phát hiện giá bất thường")
-
-    # st.write(
-    #     "Upload file CSV chứa thông tin căn nhà "
-    #     "**kèm giá thực tế**. Hệ thống sẽ dự đoán giá "
-    #     "và kết hợp 4 tín hiệu để phát hiện bất thường."
-    # )
-
-    # st.divider()
-    # st.subheader("Upload CSV có giá → Phát hiện giá bất thường")
-    
-    # # Tạo chức năng up file
-    # csv_anomaly = st.file_uploader("Chọn file CSV có giá", type=["csv"], key="p1_csv_anomaly")
-
-    # if csv_anomaly is not None:
-    #     try:
-
-    #         df_anomaly = pd.read_csv(csv_anomaly)
-
-    #         st.write("📄 Dữ liệu được upload")
-    #         st.write("📋 Xem trước dữ liệu Upload")
-    #         st.dataframe(df_anomaly.head(10),use_container_width=True)
-
-    #         # Kiểm tra cột
-    #         required_cols = [
-    #             "gia_ban_vnd",
-    #             "quan",
-    #             "loai_hinh",
-    #             "dien_tich",
-    #             "tong_so_tang",
-    #             "so_phong_ngu",
-    #             "so_phong_ve_sinh",
-    #             "giay_to_phap_ly",
-    #         ]
-    #         # Tìm các cột thiếu trong file CSV
-    #         missing_cols = [col for col in required_cols if col not in df_anomaly.columns]
-
-    #         if missing_cols:
-    #             st.error("❌ File CSV thiếu các cột bắt buộc: " + ", ".join(missing_cols))
-
-    #         else:
-
-    #             st.success( "✅ File CSV có đầy đủ các cột cần thiết.")
-
-    #             # Tham số
-    #             st.subheader("⚙️ Cấu hình phát hiện bất thường")
-
-    #             residual_z_limit = st.slider(
-    #                 "Ngưỡng Residual-Z", 1.0, 5.0, 3.0, 0.1, key="p1_residual_z"
-    #             )
-
-    #             iqr_fence_multiplier = st.slider(
-    #                 "Hệ số Tukey IQR", 0.5, 3.0, 1.5, 0.1, key="p1_iqr"
-    #             )
-
-    #             top_k_percent = st.slider(
-    #                 "Top K (%)", 1, 20, 5, 1, key="p1_top_k"
-    #             )
-
-    #             # -----------------------------------------
-    #             # BUTTON
-    #             # -----------------------------------------
-
-    #             if st.button("🚨 Phát hiện bất thường",type="primary",key="p1_detect_anomaly"):
-
-    #                 with st.spinner( "Đang phân tích dữ liệu..."):
-
-    #                     result = detect_anomalies(
-    #                         df=df_anomaly,
-    #                         model=nhatot_price,
-    #                         residual_z_limit=residual_z_limit,
-    #                         iqr_fence_multiplier=iqr_fence_multiplier,
-    #                         top_k_percent=top_k_percent
-    #                     )
-    #                     st.session_state["p1_anomaly_result"] = result
-                        
-    #                 # Thống kê
-    #             if "p1_anomaly_result" in st.session_state:
-    #                 result = st.session_state["p1_anomaly_result"]
-                    
-    #                 total_records = len(result)
-
-    #                 num_anomalies = (result["anomaly_final"] .eq("Bất thường") .sum())
-
-    #                 anomaly_rate = (
-    #                     num_anomalies/ total_records* 100
-    #                     if total_records > 0
-    #                     else 0
-    #                 )
-
-    #                 st.write("### 📊 Kết quả phân tích")
-
-    #                 c1, c2, c3 = st.columns(3)
-
-    #                 c1.metric( "Tổng số tin đăng",f"{total_records:,}" )
-
-    #                 c2.metric( "Tin bất thường",f"{num_anomalies:,}")
-
-    #                 c3.metric(   "Top K (%)",  f"{anomaly_rate:.1f}%")
-
-    #                 # Danh sách bất thường
-
-    #                 st.write("### 🚨 Danh sách tin đăng bất thường" )
-
-    #                 anomalies_df = result[result["anomaly_final"] == "Bất thường" ]
-
-    #                 if not anomalies_df.empty:
-    #                     st.dataframe( anomalies_df, use_container_width=True )
-
-    #                 else:
-
-    #                     st.success(
-    #                         "🎉 Không phát hiện tin đăng "
-    #                         "bất thường."
-    #                     )
-    #                 import plotly.express as px
-    #                 import streamlit as st
-
-    #                 # (Đặt đoạn này ngay dưới bảng kết quả bất thường anomalies_df)
-    #                 # Biểu đồ 1: Giá thực tế vs Giá dự đoán
-    #                 st.write("### 📈 Biểu đồ Giá Thực Tế vs. Giá Dự Đoán (Model AI)")
-    #                 import plotly.express as px
-
-    #                 fig1 = px.scatter(
-    #                     result,
-    #                     x="prediction",
-    #                     y="gia_thuc_te",
-    #                     color="anomaly_final",  # <--- Đã sửa từ 'bat_thuong' thành 'anomaly_final'
-    #                     color_discrete_map={"Bình thường": "#00CC96", "Bất thường": "#EF553B"},
-    #                     hover_data=["quan", "loai_hinh", "dien_tich"],
-    #                     labels={
-    #                         "prediction": "Giá dự đoán mô hình (VNĐ)",
-    #                         "gia_thuc_te": "Giá thực tế (VNĐ)",
-    #                         "anomaly_final": "Trạng thái"
-    #                     },
-    #                     title="So sánh Giá thực tế vs Giá định giá từ AI"
-    #                 )
-    #                 # Đường y = x tham chiếu
-    #                 max_val = float(max(result["prediction"].max(), result["gia_thuc_te"].max()))
-    #                 fig1.add_shape(
-    #                     type="line", line=dict(dash="dash", color="gray"),
-    #                     x0=0, x1=max_val, y0=0, y1=max_val
-    #                 )
-    #                 fig1.update_layout(margin=dict(l=20, r=20, t=40, b=20))
-    #                 st.plotly_chart(fig1, use_container_width=True)
-
-    #                 # Biểu đồ 2: Đơn giá / m2 theo Quận
-    #                 st.write("### 📦 Biểu đồ Phân Bố Đơn Giá (VNĐ/m²) Theo Từng Quận")
-    #                 fig2 = px.box(
-    #                     result,
-    #                     x="quan",
-    #                     y="gia_m2_thuc_te",
-    #                     color="anomaly_final",  # <--- Đã sửa từ 'bat_thuong' thành 'anomaly_final'
-    #                     points="all",
-    #                     color_discrete_map={"Bình thường": "#00CC96", "Bất thường": "#EF553B"},
-    #                     hover_data=["loai_hinh", "dien_tich"],
-    #                     labels={
-    #                         "quan": "Quận / Huyện",
-    #                         "gia_m2_thuc_te": "Đơn giá (VNĐ/m²)",
-    #                         "anomaly_final": "Trạng thái"
-    #                     },
-    #                     title="Khoảng giá chuẩn và điểm Outlier Đơn giá/m² theo Quận"
-    #                 )
-    #                 fig2.update_layout(margin=dict(l=20, r=20, t=40, b=20))
-    #                 st.plotly_chart(fig2, use_container_width=True)
-
-    #             st.download_button(
-    #                 "📥 Tải kết quả CSV",
-    #                 data=result.to_csv(
-    #                     index=False
-    #                 ).encode("utf-8-sig"),
-    #                 file_name=(
-    #                     "ket_qua_phat_hien_bat_thuong.csv"
-    #                 ),
-    #                 mime="text/csv",
-    #                 key="p1_download_anomaly"
-    #                 )
-    #     except Exception as e:
-
-    #         st.error( f"❌ Không thể xử lý file CSV: {e}")
-                                 
-
+  
 # =========================================================
-    # PHẦN 3 - KIỂM TRA BẤT THƯỜNG BẤT ĐỘNG SẢN (ANOMALY DETECTION)
+    # KIỂM TRA BẤT THƯỜNG BẤT ĐỘNG SẢN (ANOMALY DETECTION)
     # =========================================================
     st.markdown("---")
     st.header("🚨 Kiểm Tra Tin Bán Nhà Bất Thường", divider="red")
@@ -1195,25 +747,6 @@ elif house == "Phát hiện giá bất thường":
 
                 st.success( "✅ File CSV có đầy đủ các cột cần thiết.")
 
-                # Tham số
-                # st.subheader("⚙️ Cấu hình phát hiện bất thường")
-
-                # residual_z_limit = st.slider(
-                #     "Ngưỡng Residual-Z", 1.0, 5.0, 3.0, 0.1, key="p1_residual_z"
-                # )
-
-                # iqr_fence_multiplier = st.slider(
-                #     "Hệ số Tukey IQR", 0.5, 3.0, 1.5, 0.1, key="p1_iqr"
-                # )
-
-                # top_k_percent = st.slider(
-                #     "Top K (%)", 1, 20, 5, 1, key="p1_top_k"
-                # )
-
-                # -----------------------------------------
-                # BUTTON
-                # -----------------------------------------
-
                 if st.button("🚨 Phát hiện bất thường",type="primary",key="p1_detect_anomaly"):
 
                     with st.spinner( "Đang phân tích dữ liệu..."):
@@ -1221,9 +754,6 @@ elif house == "Phát hiện giá bất thường":
                         result = detect_anomalies(
                             df=df_anomaly,
                             model=nhatot_price,
-                            # residual_z_limit=residual_z_limit,
-                            # iqr_fence_multiplier=iqr_fence_multiplier,
-                            # top_k_percent=top_k_percent
                         )
                         st.session_state["p1_anomaly_result"] = result
                         
@@ -1267,34 +797,31 @@ elif house == "Phát hiện giá bất thường":
                             "bất thường."
                         )
                    
-
-                    # (Đặt đoạn này ngay dưới bảng kết quả bất thường anomalies_df)
                     # Biểu đồ 1: Giá thực tế vs Giá dự đoán
-                    st.write("### 📈 Biểu đồ Giá Thực Tế vs. Giá Dự Đoán (Model AI)")
-                    
+                    # st.write("### 📈 Biểu đồ Giá Thực Tế vs. Giá Dự Đoán (Model AI)")   
 
-                    fig1 = px.scatter(
-                        result,
-                        x="prediction",
-                        y="gia_thuc_te",
-                        color="anomaly_final",  # <--- Đã sửa từ 'bat_thuong' thành 'anomaly_final'
-                        color_discrete_map={"Bình thường": "#00CC96", "Bất thường": "#EF553B"},
-                        hover_data=["quan", "loai_hinh", "dien_tich"],
-                        labels={
-                            "prediction": "Giá dự đoán mô hình (VNĐ)",
-                            "gia_thuc_te": "Giá thực tế (VNĐ)",
-                            "anomaly_final": "Trạng thái"
-                        },
-                        title="So sánh Giá thực tế vs Giá định giá từ AI"
-                    )
-                    # Đường y = x tham chiếu
-                    max_val = float(max(result["prediction"].max(), result["gia_thuc_te"].max()))
-                    fig1.add_shape(
-                        type="line", line=dict(dash="dash", color="gray"),
-                        x0=0, x1=max_val, y0=0, y1=max_val
-                    )
-                    fig1.update_layout(margin=dict(l=20, r=20, t=40, b=20))
-                    st.plotly_chart(fig1, use_container_width=True)
+                    # fig1 = px.scatter(
+                    #     result,
+                    #     x="prediction",
+                    #     y="gia_thuc_te",
+                    #     color="anomaly_final",  # <--- Đã sửa từ 'bat_thuong' thành 'anomaly_final'
+                    #     color_discrete_map={"Bình thường": "#00CC96", "Bất thường": "#EF553B"},
+                    #     hover_data=["quan", "loai_hinh", "dien_tich"],
+                    #     labels={
+                    #         "prediction": "Giá dự đoán mô hình (VNĐ)",
+                    #         "gia_thuc_te": "Giá thực tế (VNĐ)",
+                    #         "anomaly_final": "Trạng thái"
+                    #     },
+                    #     title="So sánh Giá thực tế vs Giá định giá từ AI"
+                    # )
+                    # # Đường y = x tham chiếu
+                    # max_val = float(max(result["prediction"].max(), result["gia_thuc_te"].max()))
+                    # fig1.add_shape(
+                    #     type="line", line=dict(dash="dash", color="gray"),
+                    #     x0=0, x1=max_val, y0=0, y1=max_val
+                    # )
+                    # fig1.update_layout(margin=dict(l=20, r=20, t=40, b=20))
+                    # st.plotly_chart(fig1, use_container_width=True)
 
                     # Biểu đồ 2: Đơn giá / m2 theo Quận
                     st.write("### 📦 Biểu đồ Phân Bố Đơn Giá (VNĐ/m²) Theo Từng Quận")
@@ -1302,8 +829,7 @@ elif house == "Phát hiện giá bất thường":
                         result,
                         x="quan",
                         y="gia_m2_thuc_te",
-                        color="anomaly_final",  # <--- Đã sửa từ 'bat_thuong' thành 'anomaly_final'
-                        points="all",
+                        color="anomaly_final",  
                         color_discrete_map={"Bình thường": "#00CC96", "Bất thường": "#EF553B"},
                         hover_data=["loai_hinh", "dien_tich"],
                         labels={
@@ -1326,116 +852,7 @@ elif house == "Phát hiện giá bất thường":
 
             st.error( f"❌ Không thể xử lý file CSV: {e}")
 
-#                     # -----------------------------------------------------
-#                     # TRỰC QUAN HÓA KẾT QUẢ
-#                     # -----------------------------------------------------
-#                     num_anomalies = int(result["bat_thuong"].sum())
-#                     total_records = len(result)
-#                     anomaly_rate = ((num_anomalies / total_records) * 100
-#                         if total_records > 0
-#                         else 0)
-
-#                     st.write("### 📊 Thống kê kết quả phân tích")
-#                     c1, c2, c3 = st.columns(3)
-#                     c1.metric("Tổng số tin đăng", f"{total_records:,}")
-#                     c2.metric("Số tin giá bất thường", f"{num_anomalies:,}")
-#                     c3.metric("Tỷ lệ bất thường", f"{anomaly_rate:.1f}%")
-
-#                     st.write("### 🚨 Danh sách các tin đăng giá bất thường")
-#                     anomalies_df = result[result["bat_thuong"]]
-
-#                     if not anomalies_df.empty:
-#                         st.dataframe(anomalies_df, use_container_width=True)
-#                     else:
-#                         st.success( "🎉 Không phát hiện bất kỳ tin đăng bất thường nào với cấu hình hiện tại!")
-
-#                     # Nút tải xuống
-#                     st.download_button(
-#                         "📥 Tải danh sách tất cả (kèm nhãn bất thường)",
-#                         data=result.to_csv(index=False).encode("utf-8-sig"),
-#                         file_name="ket_qua_phat_hien_bat_thuong.csv",
-#                         mime="text/csv",
-#                         key="p1_download_anomaly",
-#                     )
-
-#         except Exception as e:
-#             st.error(f"❌ Không thể xử lý file CSV: {e}")
-    
 
 
-
-
-  
-    
-    
-    # btn_predict_single = st.button("🔮 Dự đoán giá căn nhà này")
-    # if btn_predict_single:
-    #     st.success(
-    #         "Kết quả dự đoán: **3.5 Tỷ VNĐ** (Ví dụ kết quả từ model)"
-    #     )
-
-    # st.markdown("---")         
-    # st.image(BASE_DIR / "nhatot.jpg",width=500,caption="Dự án Nhà Tốt")
-
-
-
-
-
-
-
-# Thư mục chứa file price_nhatot.py
-# BASE_DIR = Path(__file__).resolve().parent
-
-# Đường dẫn đến dữ liệu
-# DATA_PATH = BASE_DIR / "data_cleaned.csv"
-# # Đọc dữ liệu sản phẩm
-# df_houses = pd.read_csv(DATA_PATH)
-
-# # Tạo ID cho từng căn nhà
-# df_houses["house_id"] = df_houses.index
-
-# # Tạo 10 căn nhà ngẫu nhiên
-# if 'random_houses' not in st.session_state:
-#     st.session_state.random_houses = df_houses.sample(n=10, random_state=42).copy()
-    
-# # Open and read file nhatot_price_model.pkl
-# with open(BASE_DIR / 'nhatot_price_model.pkl', 'rb') as f:
-#     nhatot_price= joblib.load(f)
-    
-# ###### Giao diện Streamlit ######
-
-# st.image(
-#     BASE_DIR / "nhatot.jpg",
-#     use_container_width=True
-# )
-   
-# Tạo dropdown
-# house_options = [
-#     (row["tieu_de"], row["house_id"])
-#     for _, row in st.session_state.random_houses.iterrows()
-# ]
-
-# selected_house_option = st.selectbox(
-#     "Tìm nhà",
-#     options=house_options,
-#     format_func=lambda x: x[0]
-# )
-
-# Lưu căn nhà được chọn
-# st.session_state.selected_id = selected_house_option[1]
-
-# Lấy thông tin căn nhà
-# selected_house_data = st.session_state.random_houses[
-#     st.session_state.random_houses["house_id"]
-#     == st.session_state.selected_id
-# ].iloc[0]
-
-# Hiển thị
-# st.write("### Thông tin căn nhà")
-# st.write("**Tiêu đề:**", selected_house_data["tieu_de"])
-# st.write("**Giá bán:**", selected_house_data["gia_ban"])
-# st.write("**Diện tích:**", selected_house_data["dien_tich"])
-# st.write("**Địa chỉ:**", selected_house_data["dia_chi"])
-# st.write("**Tổng quan về căn nhà:**", selected_house_data["Tổng quan về căn nhà"])
 
 
